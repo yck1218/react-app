@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.2.1",
     "@babel/core": "7.9.0",
     "@loadable/component": "^5.13.1",
     "@svgr/webpack": "4.3.3",
@@ -43,6 +44,7 @@
     "mini-css-extract-plugin": "0.9.0",
     "mobx": "^5.15.4",
     "mobx-react": "^6.2.2",
+    "moment": "^2.27.0",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "pnp-webpack-plugin": "1.6.4",
     "postcss-flexbugs-fixes": "4.1.0",
@@ -54,7 +56,10 @@
     "react-app-polyfill": "^1.0.6",
     "react-dev-utils": "^10.2.1",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "resolve": "1.15.0",
     "resolve-url-loader": "3.1.1",
     "sass-loader": "8.0.2",
@@ -143,8 +148,22 @@
       "react-app"
     ],
     "plugins": [
-      ["@babel/plugin-syntax-dynamic-import"], ["@babel/plugin-proposal-decorators", { "legacy": true }],
-      ["@babel/plugin-proposal-class-properties", { "loose" : true }]]
+      [
+        "@babel/plugin-syntax-dynamic-import"
+      ],
+      [
+        "@babel/plugin-proposal-decorators",
+        {
+          "legacy": true
+        }
+      ],
+      [
+        "@babel/plugin-proposal-class-properties",
+        {
+          "loose": true
+        }
+      ]
+    ]
   },
   "devDependencies": {
     "http-proxy-middleware": "^1.0.5",

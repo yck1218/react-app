@@ -4,17 +4,14 @@ import './style.min.css';
 import { Layout, Menu, } from 'antd';
 import {
     MenuUnfoldOutlined,
-    MenuFoldOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
-    UploadOutlined,
+    MenuFoldOutlined
 } from '@ant-design/icons';
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink, Route ,withRouter,Redirect } from 'react-router-dom';
 //二级引入需要再一级引入的后面
 // const { SubMenu } = Menu;
 const { Sider, Content } = Layout;
 
-export default class Box extends React.Component {
+ class Box extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -26,27 +23,32 @@ export default class Box extends React.Component {
             collapsed: !this.state.collapsed,
         });
     };
-    //获取左侧路由导航菜单
-    getNavList(){
-        return(
-            routes.map(ele=>(
-                    <Menu.Item key={ele.id} icon={<UserOutlined />}>
+    // 渲染左侧导航菜单
+    gitList(){
+        let list = [];
+        routes.map(ele=>{
+            if(!ele.option){
+                list.push(
+                    <Menu.Item key={ele.id} icon={ <ele.icon/>}>
                             <NavLink exact  to={ele.path}>{ele.title}</NavLink>
                     </Menu.Item>
-        ))
-        )
+                )
+            }
+        })
+        return list
     }
-    // 获取中间主要的内容部分
-    getContent(){
-        return(
-            routes.map(ele=>(
-                <Route exact key={ele.id} path={ele.path} component={ele.component} /> 
-            ))
-        )
+    // 获取匹配视图*
+    getMain(){
+        let main = [];
+        routes.map(ele=>{
+            if(!ele.option){
+                main.push( <Route exact key={ele.id} path={ele.path} component={ele.component} /> )
+            }
+        }) 
+        return main;
     }
     //生命周期函数
     componentDidMount(){
-        console.log('我是路由数据',routes);
     }
     render() {
         return (
@@ -60,7 +62,7 @@ export default class Box extends React.Component {
                             })}
                         </li>
                         <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-                           {this.getNavList()}
+                           {this.gitList()}
                         </Menu>
                     
                     </Sider>
@@ -73,7 +75,9 @@ export default class Box extends React.Component {
                                 minHeight: 280,
                             }}
                         >
-                        {this.getContent()}
+                        {/* {this.getContent()} */}
+                        {this.getMain()}
+                        <Redirect path='/*' to='/home'></Redirect>
                     </Content>
                     </Layout>
                 </Layout>
@@ -81,3 +85,4 @@ export default class Box extends React.Component {
         )
     }
 }
+export default withRouter(Box)

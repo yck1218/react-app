@@ -2,10 +2,10 @@ import React from  'react';
 import {GetCnode} from '@/utils/api.js';
   class Home extends React.Component{
 
-constructor(props){
-    super(props)
+// constructor(props){
+//     super(props)
     
-}
+// }
 componentDidMount(){
  
 }
